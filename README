@@ -1,0 +1,9 @@
+
+A relatively simple development webserver for node.js. It moniters the current 
+directory (recursively) for file changes, and restarts your node when it finds
+one.
+
+Usage:
+node devserver.js myapp.js
+
+
