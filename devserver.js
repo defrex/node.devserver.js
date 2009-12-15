@@ -8,13 +8,18 @@ current_dir = current_dir.slice(0, current_dir.length-1).join('/');
 
 var start_server = function(){
     server = process.createChildProcess('node', [child_js_file]);
-    server.addListener("output", function(data){sys.puts(data);});
+    var pass_along = function(data){
+        if (data !== null) sys.print(data);
+    };
+    server.addListener('output', pass_along);
+    server.addListener('error', pass_along);
+    sys.puts('server started');
 };
 
 var restart_server = function(){
     sys.puts('change discovered, restarting server');
     server.close();
-    start_server();
+    setTimeout(start_server, 500);
 };
 
 var parse_file_list = function(dir, files){
